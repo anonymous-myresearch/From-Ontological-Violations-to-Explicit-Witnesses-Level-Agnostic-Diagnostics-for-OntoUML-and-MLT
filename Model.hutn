@@ -1,0 +1,154 @@
+EN {hasName Violation_Seeded_Model, hasCustodian anonymous.examples,
+
+  EN {hasName SecondOT,
+
+    EN {hasName PersonType, hasPotency 2,
+      MK {hasName PT_kind, hasTag OntoUML.kind},
+      MK {hasName PT_powertypeOf_P, hasTag MLT.powertypeOf, refersTo FirstOT.Person}
+    },
+
+    EN {hasName PersonTypeByGender, hasPotency 2,
+      MK {hasName PTBG_kind, hasTag OntoUML.kind},
+      MK {hasName PTBG_partitions_P, hasTag MLT.partitions, refersTo FirstOT.Person},
+      MK {hasName PTBG_categorizes_P, hasTag MLT.categorizes, refersTo FirstOT.Person}
+    },
+
+    EN {hasName EmployeeType, hasPotency 2,
+      MK {hasName ET_subkind, hasTag OntoUML.subkind},
+      MK {hasName ET_categorizes_P, hasTag MLT.categorizes, refersTo FirstOT.Person}
+    },
+
+    EN {hasName ResearcherTypeByDoctoralStatus, hasPotency 2,
+      MK {hasName RTD_subkind, hasTag OntoUML.subkind},
+      MK {hasName RTD_partitions_R, hasTag MLT.partitions, refersTo FirstOT.Researcher}
+    },
+
+    EN {hasName ResearcherTypeByContractStatus, hasPotency 2,
+      MK {hasName RTC_subkind, hasTag OntoUML.subkind},
+      MK {hasName RTC_partitions_R, hasTag MLT.partitions, refersTo FirstOT.Researcher}
+    },
+
+    CA {hasName C_PTBG_PT,
+      IN {hasName Gen_PT, hasTag Generalization, involvesType PersonType},
+      IN {hasName Spec_PTBG, hasTag Specialization, involvesType PersonTypeByGender}
+    },
+
+    CA {hasName C_ET_PT,
+      IN {hasName Gen_PT2, hasTag Generalization, involvesType PersonType},
+      IN {hasName Spec_ET, hasTag Specialization, involvesType EmployeeType}
+    },
+
+    CA {hasName C_RTC_ET,
+      IN {hasName Gen_ET, hasTag Generalization, involvesType EmployeeType},
+      IN {hasName Spec_RTC, hasTag Specialization, involvesType ResearcherTypeByContractStatus}
+    },
+
+    CA {hasName C_RTD_ET,
+      IN {hasName Gen_ET, hasTag Generalization, involvesType EmployeeType},
+      IN {hasName Spec_RTD, hasTag Specialization, involvesType ResearcherTypeByDoctoralStatus}
+    },
+
+    CA {hasName C_RTD_RTC,
+      IN {hasName Gen_RTC, hasTag Generalization, involvesType ResearcherTypeByContractStatus},
+      IN {hasName Spec_RTD, hasTag Specialization, involvesType ResearcherTypeByDoctoralStatus}
+    }
+  },
+
+  EN {hasName FirstOT,
+
+    EN {hasName Person, hasPotency 1, hasDeclaredType SecondOT.PersonType,
+      MK {hasName P_kind, hasTag OntoUML.kind}
+    },
+
+    EN {hasName Man, hasPotency 1, hasDeclaredType SecondOT.PersonTypeByGender,
+      MK {hasName Man_subkind, hasTag OntoUML.subkind}
+    },
+
+    EN {hasName Woman, hasPotency 1, hasDeclaredType SecondOT.PersonTypeByGender,
+      MK {hasName Woman_subkind, hasTag OntoUML.subkind}
+    },
+
+    EN {hasName Manager, hasPotency 1, hasDeclaredType SecondOT.EmployeeType,
+      MK {hasName M_role, hasTag OntoUML.role}
+    },
+
+    EN {hasName Researcher, hasPotency 1, hasDeclaredType SecondOT.EmployeeType,
+      MK {hasName R_role, hasTag OntoUML.role}
+    },
+
+    EN {hasName ManWomanOverlap, hasPotency 1, hasDeclaredType SecondOT.PersonType,
+      MK {hasName MWO_subkind, hasTag OntoUML.subkind}
+    },
+
+    EN {hasName PhDResearcher, hasPotency 1, hasDeclaredType SecondOT.ResearcherTypeByDoctoralStatus,
+      MK {hasName PhD_role, hasTag OntoUML.role}
+    },
+
+    EN {hasName NonPhDResearcher, hasPotency 1, hasDeclaredType SecondOT.ResearcherTypeByDoctoralStatus,
+      MK {hasName NonPhD_role, hasTag OntoUML.role}
+    },
+
+    EN {hasName PermanentResearcher, hasPotency 1, hasDeclaredType SecondOT.ResearcherTypeByContractStatus,
+      MK {hasName Perm_role, hasTag OntoUML.role}
+    },
+
+    EN {hasName FixedTermResearcher, hasPotency 1, hasDeclaredType SecondOT.ResearcherTypeByContractStatus,
+      MK {hasName Fixed_role, hasTag OntoUML.role}
+    },
+
+    CA {hasName C_Gender, isComplete true, isDisjoint true,
+      IN {hasName Gen_P, hasTag Generalization, involvesType Person},
+      IN {hasName Spec_Man, hasTag Specialization, involvesType Man},
+      IN {hasName Spec_Woman, hasTag Specialization, involvesType Woman}
+    },
+
+    CA {hasName EmployeeRoles, isDisjoint false,
+      IN {hasName Gen_P, hasTag Generalization, involvesType Person},
+      IN {hasName Spec_M, hasTag Specialization, involvesType Manager},
+      IN {hasName Spec_R, hasTag Specialization, involvesType Researcher}
+    },
+
+    CA {hasName C_MWO_Man,
+      IN {hasName Gen_Man, hasTag Generalization, involvesType Man},
+      IN {hasName Spec_MWO, hasTag Specialization, involvesType ManWomanOverlap}
+    },
+
+    CA {hasName C_MWO_Woman,
+      IN {hasName Gen_Woman, hasTag Generalization, involvesType Woman},
+      IN {hasName Spec_MWO, hasTag Specialization, involvesType ManWomanOverlap}
+    },
+
+    CA {hasName C_DocStatus, isComplete true, isDisjoint true,
+      IN {hasName Gen_R, hasTag Generalization, involvesType Researcher},
+      IN {hasName Spec_PhD, hasTag Specialization, involvesType PhDResearcher},
+      IN {hasName Spec_NonPhD, hasTag Specialization, involvesType NonPhDResearcher}
+    },
+
+    CA {hasName C_ContractStatus, isComplete true, isDisjoint true,
+      IN {hasName Gen_R, hasTag Generalization, involvesType Researcher},
+      IN {hasName Spec_Perm, hasTag Specialization, involvesType PermanentResearcher},
+      IN {hasName Spec_Fixed, hasTag Specialization, involvesType FixedTermResearcher}
+    },
+
+    RE {hasName worksFor, hasPotency 1,
+      PA {hasName worksFor_R, isConnectedTo Researcher},
+      PA {hasName worksFor_M, isConnectedTo Manager}
+    }
+  },
+
+  EN {hasName Individual,
+
+    EN {hasName Ana, hasPotency 0, hasDeclaredType FirstOT.Woman},
+
+    EN {hasName Bob, hasPotency 0, hasDeclaredType FirstOT.Man},
+
+    EN {hasName Alex, hasPotency 0,
+      MK {hasName Alex_R, hasTag OntoUML.isInstanceOf, refersTo FirstOT.Researcher},
+      MK {hasName Alex_M, hasTag OntoUML.isInstanceOf, refersTo FirstOT.Manager}
+    },
+
+    EN {hasName Casey, hasPotency 0, hasDeclaredType FirstOT.ManWomanOverlap},
+
+    EN {hasName Taylor, hasPotency 0, hasDeclaredType SecondOT.PersonTypeByGender}
+  }
+}
