@@ -4,8 +4,9 @@ This repository consists of the following required artifacts :
 - HUTN file (Human-Usable Textual Notation) of the model
 - Program file (Datalog Facts and Rules executable on NEMO Graph Rule Engine)
 
-Paper-facing normalized summary:
+**Paper-facing normalized summary:**
 
+By executing xxxxx.rls file on NEMO, the output will be generated as .csv files. Following output demonstrates the voilations which can be found in the results folder: 
 
 
 err_kind_bad_ancestor(PersonTypeByGender, PersonType, OntoUML.kind).
