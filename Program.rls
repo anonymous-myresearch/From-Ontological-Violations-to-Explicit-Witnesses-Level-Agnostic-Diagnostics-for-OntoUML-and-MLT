@@ -1,0 +1,1014 @@
+% ======================================================================
+% Facts and rules set for the violation-seeded substrate model
+% ======================================================================
+
+% ----------------------------------------------------------------------
+% Model facts
+% ----------------------------------------------------------------------
+
+Entity(Violation_Seeded_Model).
+hasName(Violation_Seeded_Model, "Violation_Seeded_Model").
+hasCustodian(Violation_Seeded_Model, examples).
+Entity(SecondOT).
+hasName(SecondOT, "SecondOT").
+hasCustodian(SecondOT, Violation_Seeded_Model).
+Categorization(C_ET_PT).
+hasName(C_ET_PT, "C_ET_PT").
+hasCustodian(C_ET_PT, SecondOT).
+Intercalation(Gen_PT2).
+hasName(Gen_PT2, "Gen_PT2").
+hasCustodian(Gen_PT2, C_ET_PT).
+hasTag(Gen_PT2, Generalization).
+involvesType(Gen_PT2, PersonType).
+Intercalation(Spec_ET).
+hasName(Spec_ET, "Spec_ET").
+hasCustodian(Spec_ET, C_ET_PT).
+hasTag(Spec_ET, Specialization).
+involvesType(Spec_ET, EmployeeType).
+Categorization(C_PTBG_PT).
+hasName(C_PTBG_PT, "C_PTBG_PT").
+hasCustodian(C_PTBG_PT, SecondOT).
+Intercalation(Gen_PT).
+hasName(Gen_PT, "Gen_PT").
+hasCustodian(Gen_PT, C_PTBG_PT).
+hasTag(Gen_PT, Generalization).
+involvesType(Gen_PT, PersonType).
+Intercalation(Spec_PTBG).
+hasName(Spec_PTBG, "Spec_PTBG").
+hasCustodian(Spec_PTBG, C_PTBG_PT).
+hasTag(Spec_PTBG, Specialization).
+involvesType(Spec_PTBG, PersonTypeByGender).
+Categorization(C_RTC_ET).
+hasName(C_RTC_ET, "C_RTC_ET").
+hasCustodian(C_RTC_ET, SecondOT).
+Intercalation(C_RTC_ET_Gen_ET).
+hasName(C_RTC_ET_Gen_ET, "Gen_ET").
+hasCustodian(C_RTC_ET_Gen_ET, C_RTC_ET).
+hasTag(C_RTC_ET_Gen_ET, Generalization).
+involvesType(C_RTC_ET_Gen_ET, EmployeeType).
+Intercalation(Spec_RTC).
+hasName(Spec_RTC, "Spec_RTC").
+hasCustodian(Spec_RTC, C_RTC_ET).
+hasTag(Spec_RTC, Specialization).
+involvesType(Spec_RTC, ResearcherTypeByContractStatus).
+Categorization(C_RTD_ET).
+hasName(C_RTD_ET, "C_RTD_ET").
+hasCustodian(C_RTD_ET, SecondOT).
+Intercalation(C_RTD_ET_Gen_ET).
+hasName(C_RTD_ET_Gen_ET, "Gen_ET").
+hasCustodian(C_RTD_ET_Gen_ET, C_RTD_ET).
+hasTag(C_RTD_ET_Gen_ET, Generalization).
+involvesType(C_RTD_ET_Gen_ET, EmployeeType).
+Intercalation(C_RTD_ET_Spec_RTD).
+hasName(C_RTD_ET_Spec_RTD, "Spec_RTD").
+hasCustodian(C_RTD_ET_Spec_RTD, C_RTD_ET).
+hasTag(C_RTD_ET_Spec_RTD, Specialization).
+involvesType(C_RTD_ET_Spec_RTD, ResearcherTypeByDoctoralStatus).
+Categorization(C_RTD_RTC).
+hasName(C_RTD_RTC, "C_RTD_RTC").
+hasCustodian(C_RTD_RTC, SecondOT).
+Intercalation(Gen_RTC).
+hasName(Gen_RTC, "Gen_RTC").
+hasCustodian(Gen_RTC, C_RTD_RTC).
+hasTag(Gen_RTC, Generalization).
+involvesType(Gen_RTC, ResearcherTypeByContractStatus).
+Intercalation(C_RTD_RTC_Spec_RTD).
+hasName(C_RTD_RTC_Spec_RTD, "Spec_RTD").
+hasCustodian(C_RTD_RTC_Spec_RTD, C_RTD_RTC).
+hasTag(C_RTD_RTC_Spec_RTD, Specialization).
+involvesType(C_RTD_RTC_Spec_RTD, ResearcherTypeByDoctoralStatus).
+Entity(EmployeeType).
+hasName(EmployeeType, "EmployeeType").
+hasCustodian(EmployeeType, SecondOT).
+hasPotency(EmployeeType, 2).
+Marker(ET_categorizes_P).
+hasName(ET_categorizes_P, "ET_categorizes_P").
+hasCustodian(ET_categorizes_P, EmployeeType).
+hasTag(ET_categorizes_P, <MLT.categorizes>).
+refersTo(ET_categorizes_P, Person).
+Marker(ET_subkind).
+hasName(ET_subkind, "ET_subkind").
+hasCustodian(ET_subkind, EmployeeType).
+hasTag(ET_subkind, <OntoUML.subkind>).
+Entity(PersonType).
+hasName(PersonType, "PersonType").
+hasCustodian(PersonType, SecondOT).
+hasPotency(PersonType, 2).
+Marker(PT_kind).
+hasName(PT_kind, "PT_kind").
+hasCustodian(PT_kind, PersonType).
+hasTag(PT_kind, <OntoUML.kind>).
+Marker(PT_powertypeOf_P).
+hasName(PT_powertypeOf_P, "PT_powertypeOf_P").
+hasCustodian(PT_powertypeOf_P, PersonType).
+hasTag(PT_powertypeOf_P, <MLT.powertypeOf>).
+refersTo(PT_powertypeOf_P, Person).
+Entity(PersonTypeByGender).
+hasName(PersonTypeByGender, "PersonTypeByGender").
+hasCustodian(PersonTypeByGender, SecondOT).
+hasPotency(PersonTypeByGender, 2).
+Marker(PTBG_categorizes_P).
+hasName(PTBG_categorizes_P, "PTBG_categorizes_P").
+hasCustodian(PTBG_categorizes_P, PersonTypeByGender).
+hasTag(PTBG_categorizes_P, <MLT.categorizes>).
+refersTo(PTBG_categorizes_P, Person).
+Marker(PTBG_kind).
+hasName(PTBG_kind, "PTBG_kind").
+hasCustodian(PTBG_kind, PersonTypeByGender).
+hasTag(PTBG_kind, <OntoUML.kind>).
+Marker(PTBG_partitions_P).
+hasName(PTBG_partitions_P, "PTBG_partitions_P").
+hasCustodian(PTBG_partitions_P, PersonTypeByGender).
+hasTag(PTBG_partitions_P, <MLT.partitions>).
+refersTo(PTBG_partitions_P, Person).
+Entity(ResearcherTypeByContractStatus).
+hasName(ResearcherTypeByContractStatus, "ResearcherTypeByContractStatus").
+hasCustodian(ResearcherTypeByContractStatus, SecondOT).
+hasPotency(ResearcherTypeByContractStatus, 2).
+Marker(RTC_partitions_R).
+hasName(RTC_partitions_R, "RTC_partitions_R").
+hasCustodian(RTC_partitions_R, ResearcherTypeByContractStatus).
+hasTag(RTC_partitions_R, <MLT.partitions>).
+refersTo(RTC_partitions_R, Researcher).
+Marker(RTC_subkind).
+hasName(RTC_subkind, "RTC_subkind").
+hasCustodian(RTC_subkind, ResearcherTypeByContractStatus).
+hasTag(RTC_subkind, <OntoUML.subkind>).
+Entity(ResearcherTypeByDoctoralStatus).
+hasName(ResearcherTypeByDoctoralStatus, "ResearcherTypeByDoctoralStatus").
+hasCustodian(ResearcherTypeByDoctoralStatus, SecondOT).
+hasPotency(ResearcherTypeByDoctoralStatus, 2).
+Marker(RTD_partitions_R).
+hasName(RTD_partitions_R, "RTD_partitions_R").
+hasCustodian(RTD_partitions_R, ResearcherTypeByDoctoralStatus).
+hasTag(RTD_partitions_R, <MLT.partitions>).
+refersTo(RTD_partitions_R, Researcher).
+Marker(RTD_subkind).
+hasName(RTD_subkind, "RTD_subkind").
+hasCustodian(RTD_subkind, ResearcherTypeByDoctoralStatus).
+hasTag(RTD_subkind, <OntoUML.subkind>).
+Entity(FirstOT).
+hasName(FirstOT, "FirstOT").
+hasCustodian(FirstOT, Violation_Seeded_Model).
+Categorization(C_ContractStatus).
+hasName(C_ContractStatus, "C_ContractStatus").
+hasCustodian(C_ContractStatus, FirstOT).
+isComplete(C_ContractStatus, true).
+isDisjoint(C_ContractStatus, true).
+Intercalation(C_ContractStatus_Gen_R).
+hasName(C_ContractStatus_Gen_R, "Gen_R").
+hasCustodian(C_ContractStatus_Gen_R, C_ContractStatus).
+hasTag(C_ContractStatus_Gen_R, Generalization).
+involvesType(C_ContractStatus_Gen_R, Researcher).
+Intercalation(Spec_Fixed).
+hasName(Spec_Fixed, "Spec_Fixed").
+hasCustodian(Spec_Fixed, C_ContractStatus).
+hasTag(Spec_Fixed, Specialization).
+involvesType(Spec_Fixed, FixedTermResearcher).
+Intercalation(Spec_Perm).
+hasName(Spec_Perm, "Spec_Perm").
+hasCustodian(Spec_Perm, C_ContractStatus).
+hasTag(Spec_Perm, Specialization).
+involvesType(Spec_Perm, PermanentResearcher).
+Categorization(C_DocStatus).
+hasName(C_DocStatus, "C_DocStatus").
+hasCustodian(C_DocStatus, FirstOT).
+isComplete(C_DocStatus, true).
+isDisjoint(C_DocStatus, true).
+Intercalation(C_DocStatus_Gen_R).
+hasName(C_DocStatus_Gen_R, "Gen_R").
+hasCustodian(C_DocStatus_Gen_R, C_DocStatus).
+hasTag(C_DocStatus_Gen_R, Generalization).
+involvesType(C_DocStatus_Gen_R, Researcher).
+Intercalation(Spec_NonPhD).
+hasName(Spec_NonPhD, "Spec_NonPhD").
+hasCustodian(Spec_NonPhD, C_DocStatus).
+hasTag(Spec_NonPhD, Specialization).
+involvesType(Spec_NonPhD, NonPhDResearcher).
+Intercalation(Spec_PhD).
+hasName(Spec_PhD, "Spec_PhD").
+hasCustodian(Spec_PhD, C_DocStatus).
+hasTag(Spec_PhD, Specialization).
+involvesType(Spec_PhD, PhDResearcher).
+Categorization(C_Gender).
+hasName(C_Gender, "C_Gender").
+hasCustodian(C_Gender, FirstOT).
+isComplete(C_Gender, true).
+isDisjoint(C_Gender, true).
+Intercalation(C_Gender_Gen_P).
+hasName(C_Gender_Gen_P, "Gen_P").
+hasCustodian(C_Gender_Gen_P, C_Gender).
+hasTag(C_Gender_Gen_P, Generalization).
+involvesType(C_Gender_Gen_P, Person).
+Intercalation(Spec_Man).
+hasName(Spec_Man, "Spec_Man").
+hasCustodian(Spec_Man, C_Gender).
+hasTag(Spec_Man, Specialization).
+involvesType(Spec_Man, Man).
+Intercalation(Spec_Woman).
+hasName(Spec_Woman, "Spec_Woman").
+hasCustodian(Spec_Woman, C_Gender).
+hasTag(Spec_Woman, Specialization).
+involvesType(Spec_Woman, Woman).
+Categorization(C_MWO_Man).
+hasName(C_MWO_Man, "C_MWO_Man").
+hasCustodian(C_MWO_Man, FirstOT).
+Intercalation(Gen_Man).
+hasName(Gen_Man, "Gen_Man").
+hasCustodian(Gen_Man, C_MWO_Man).
+hasTag(Gen_Man, Generalization).
+involvesType(Gen_Man, Man).
+Intercalation(C_MWO_Man_Spec_MWO).
+hasName(C_MWO_Man_Spec_MWO, "Spec_MWO").
+hasCustodian(C_MWO_Man_Spec_MWO, C_MWO_Man).
+hasTag(C_MWO_Man_Spec_MWO, Specialization).
+involvesType(C_MWO_Man_Spec_MWO, ManWomanOverlap).
+Categorization(C_MWO_Woman).
+hasName(C_MWO_Woman, "C_MWO_Woman").
+hasCustodian(C_MWO_Woman, FirstOT).
+Intercalation(Gen_Woman).
+hasName(Gen_Woman, "Gen_Woman").
+hasCustodian(Gen_Woman, C_MWO_Woman).
+hasTag(Gen_Woman, Generalization).
+involvesType(Gen_Woman, Woman).
+Intercalation(C_MWO_Woman_Spec_MWO).
+hasName(C_MWO_Woman_Spec_MWO, "Spec_MWO").
+hasCustodian(C_MWO_Woman_Spec_MWO, C_MWO_Woman).
+hasTag(C_MWO_Woman_Spec_MWO, Specialization).
+involvesType(C_MWO_Woman_Spec_MWO, ManWomanOverlap).
+Categorization(EmployeeRoles).
+hasName(EmployeeRoles, "EmployeeRoles").
+hasCustodian(EmployeeRoles, FirstOT).
+Intercalation(EmployeeRoles_Gen_P).
+hasName(EmployeeRoles_Gen_P, "Gen_P").
+hasCustodian(EmployeeRoles_Gen_P, EmployeeRoles).
+hasTag(EmployeeRoles_Gen_P, Generalization).
+involvesType(EmployeeRoles_Gen_P, Person).
+Intercalation(Spec_M).
+hasName(Spec_M, "Spec_M").
+hasCustodian(Spec_M, EmployeeRoles).
+hasTag(Spec_M, Specialization).
+involvesType(Spec_M, Manager).
+Intercalation(Spec_R).
+hasName(Spec_R, "Spec_R").
+hasCustodian(Spec_R, EmployeeRoles).
+hasTag(Spec_R, Specialization).
+involvesType(Spec_R, Researcher).
+Entity(FixedTermResearcher).
+hasName(FixedTermResearcher, "FixedTermResearcher").
+hasCustodian(FixedTermResearcher, FirstOT).
+hasPotency(FixedTermResearcher, 1).
+hasDeclaredType(FixedTermResearcher, ResearcherTypeByContractStatus).
+Marker(Fixed_role).
+hasName(Fixed_role, "Fixed_role").
+hasCustodian(Fixed_role, FixedTermResearcher).
+hasTag(Fixed_role, <OntoUML.role>).
+Entity(Man).
+hasName(Man, "Man").
+hasCustodian(Man, FirstOT).
+hasPotency(Man, 1).
+hasDeclaredType(Man, PersonTypeByGender).
+Marker(Man_subkind).
+hasName(Man_subkind, "Man_subkind").
+hasCustodian(Man_subkind, Man).
+hasTag(Man_subkind, <OntoUML.subkind>).
+Entity(ManWomanOverlap).
+hasName(ManWomanOverlap, "ManWomanOverlap").
+hasCustodian(ManWomanOverlap, FirstOT).
+hasPotency(ManWomanOverlap, 1).
+hasDeclaredType(ManWomanOverlap, PersonType).
+Marker(MWO_subkind).
+hasName(MWO_subkind, "MWO_subkind").
+hasCustodian(MWO_subkind, ManWomanOverlap).
+hasTag(MWO_subkind, <OntoUML.subkind>).
+Entity(Manager).
+hasName(Manager, "Manager").
+hasCustodian(Manager, FirstOT).
+hasPotency(Manager, 1).
+hasDeclaredType(Manager, EmployeeType).
+Marker(M_role).
+hasName(M_role, "M_role").
+hasCustodian(M_role, Manager).
+hasTag(M_role, <OntoUML.role>).
+Entity(NonPhDResearcher).
+hasName(NonPhDResearcher, "NonPhDResearcher").
+hasCustodian(NonPhDResearcher, FirstOT).
+hasPotency(NonPhDResearcher, 1).
+hasDeclaredType(NonPhDResearcher, ResearcherTypeByDoctoralStatus).
+Marker(NonPhD_role).
+hasName(NonPhD_role, "NonPhD_role").
+hasCustodian(NonPhD_role, NonPhDResearcher).
+hasTag(NonPhD_role, <OntoUML.role>).
+Entity(PermanentResearcher).
+hasName(PermanentResearcher, "PermanentResearcher").
+hasCustodian(PermanentResearcher, FirstOT).
+hasPotency(PermanentResearcher, 1).
+hasDeclaredType(PermanentResearcher, ResearcherTypeByContractStatus).
+Marker(Perm_role).
+hasName(Perm_role, "Perm_role").
+hasCustodian(Perm_role, PermanentResearcher).
+hasTag(Perm_role, <OntoUML.role>).
+Entity(Person).
+hasName(Person, "Person").
+hasCustodian(Person, FirstOT).
+hasPotency(Person, 1).
+hasDeclaredType(Person, PersonType).
+Marker(P_kind).
+hasName(P_kind, "P_kind").
+hasCustodian(P_kind, Person).
+hasTag(P_kind, <OntoUML.kind>).
+Entity(PhDResearcher).
+hasName(PhDResearcher, "PhDResearcher").
+hasCustodian(PhDResearcher, FirstOT).
+hasPotency(PhDResearcher, 1).
+hasDeclaredType(PhDResearcher, ResearcherTypeByDoctoralStatus).
+Marker(PhD_role).
+hasName(PhD_role, "PhD_role").
+hasCustodian(PhD_role, PhDResearcher).
+hasTag(PhD_role, <OntoUML.role>).
+Entity(Researcher).
+hasName(Researcher, "Researcher").
+hasCustodian(Researcher, FirstOT).
+hasPotency(Researcher, 1).
+hasDeclaredType(Researcher, EmployeeType).
+Marker(R_role).
+hasName(R_role, "R_role").
+hasCustodian(R_role, Researcher).
+hasTag(R_role, <OntoUML.role>).
+Entity(Woman).
+hasName(Woman, "Woman").
+hasCustodian(Woman, FirstOT).
+hasPotency(Woman, 1).
+hasDeclaredType(Woman, PersonTypeByGender).
+Marker(Woman_subkind).
+hasName(Woman_subkind, "Woman_subkind").
+hasCustodian(Woman_subkind, Woman).
+hasTag(Woman_subkind, <OntoUML.subkind>).
+Relationship(worksFor).
+hasName(worksFor, "worksFor").
+hasCustodian(worksFor, FirstOT).
+hasPotency(worksFor, 1).
+Participation(worksFor_M).
+hasName(worksFor_M, "worksFor_M").
+hasCustodian(worksFor_M, worksFor).
+hasUpperBound(worksFor_M, 1).
+hasLowerBound(worksFor_M, 1).
+isNavigableTo(worksFor_M, false).
+isConnectedTo(worksFor_M, Manager).
+Participation(worksFor_R).
+hasName(worksFor_R, "worksFor_R").
+hasCustodian(worksFor_R, worksFor).
+hasUpperBound(worksFor_R, 1).
+hasLowerBound(worksFor_R, 1).
+isNavigableTo(worksFor_R, false).
+isConnectedTo(worksFor_R, Researcher).
+Entity(Individual).
+hasName(Individual, "Individual").
+hasCustodian(Individual, Violation_Seeded_Model).
+Entity(Alex).
+hasPotency(Alex, 0).
+hasName(Alex, "Alex").
+hasCustodian(Alex, Individual).
+Marker(Alex_M).
+hasName(Alex_M, "Alex_M").
+hasCustodian(Alex_M, Alex).
+hasTag(Alex_M, <OntoUML.isInstanceOf>).
+refersTo(Alex_M, Manager).
+Marker(Alex_R).
+hasName(Alex_R, "Alex_R").
+hasCustodian(Alex_R, Alex).
+hasTag(Alex_R, <OntoUML.isInstanceOf>).
+refersTo(Alex_R, Researcher).
+Entity(Ana).
+hasPotency(Ana, 0).
+hasName(Ana, "Ana").
+hasCustodian(Ana, Individual).
+hasDeclaredType(Ana, Woman).
+Entity(Bob).
+hasPotency(Bob, 0).
+hasName(Bob, "Bob").
+hasCustodian(Bob, Individual).
+hasDeclaredType(Bob, Man).
+Entity(Casey).
+hasPotency(Casey, 0).
+hasName(Casey, "Casey").
+hasCustodian(Casey, Individual).
+hasDeclaredType(Casey, ManWomanOverlap).
+Entity(Taylor).
+hasPotency(Taylor, 0).
+hasName(Taylor, "Taylor").
+hasCustodian(Taylor, Individual).
+hasDeclaredType(Taylor, PersonTypeByGender).
+
+
+
+% ----------------------------------------------------------------------
+% Rules
+% ----------------------------------------------------------------------
+
+
+Node(?X) :- Entity(?X).
+Node(?X) :- Relationship(?X).
+Node(?X) :- Intercalation(?X).
+Node(?X) :- Participation(?X).
+Node(?X) :- Categorization(?X).
+Node(?X) :- Attribute(?X).
+Node(?X) :- Method(?X).
+Node(?X) :- Marker(?X).
+
+marked(?X, ?Tag) :-
+    Node(?X),
+    Marker(?M),
+    hasCustodian(?M, ?X),
+    hasTag(?M, ?Tag).
+
+markedRef(?X, ?Tag, ?Target) :-
+    Node(?X),
+    Node(?Target),
+    Marker(?M),
+    hasCustodian(?M, ?X),
+    hasTag(?M, ?Tag),
+    refersTo(?M, ?Target).
+
+@export Node :- csv{}.
+@export marked :- csv{}.
+@export markedRef :- csv{}.
+
+% ----------------------------------------------------------------------
+% 2. Tag aliases
+% ----------------------------------------------------------------------
+
+% Intercalation tags.
+generalizationTag(<CategorizationTag.Generalization>).
+generalizationTag(Generalization).
+
+specializationTag(<CategorizationTag.Specialization>).
+specializationTag(Specialization).
+
+% OntoUML class/category marker tags.
+tag_kind(<OntoUML.kind>).
+
+tag_collective(<OntoUML.collective>).
+
+tag_quantity(<OntoUML.quantity>).
+
+tag_subkind(<OntoUML.subkind>).
+
+tag_role(<OntoUML.role>).
+
+tag_phase(<OntoUML.phase>).
+
+tag_category(<OntoUML.category>).
+
+tag_mixin(<OntoUML.mixin>).
+
+tag_roleMixin(<OntoUML.roleMixin>).
+
+tag_phaseMixin(<OntoUML.phaseMixin>).
+
+tag_relator(<OntoUML.relator>).
+
+tag_mode(<OntoUML.mode>).
+
+tag_quality(<OntoUML.quality>).
+
+% OntoUML instance-of tags.
+% Relationship endpoints are obtained directly from the RE/PA structure;
+% no sourceEnd/targetEnd marker tags are required for BinOver.
+tag_ontouml_iof(<OntoUML.isInstanceOf>).
+
+% MLT marker tags.
+tag_mlt_iof(<MLT.isInstanceOf>).
+
+tag_partitions(<MLT.partitions>).
+
+tag_powertypeOf(<MLT.powertypeOf>).
+
+tag_categorizes(<MLT.categorizes>).
+
+% ----------------------------------------------------------------------
+% 3. Specialization, ancestors, and descendants
+% ----------------------------------------------------------------------
+generalizes(?C, ?Base) :-
+    Intercalation(?I),
+    hasCustodian(?I, ?C),
+    hasTag(?I, ?Tag),
+    generalizationTag(?Tag),
+    involvesType(?I, ?Base).
+
+specializesIn(?C, ?Sub) :-
+    Intercalation(?I),
+    hasCustodian(?I, ?C),
+    hasTag(?I, ?Tag),
+    specializationTag(?Tag),
+    involvesType(?I, ?Sub).
+
+specializes(?Sub, ?Base) :-
+    generalizes(?C, ?Base),
+    specializesIn(?C, ?Sub).
+
+ancestor(?X, ?Y) :-
+    specializes(?X, ?Y).
+
+ancestor(?X, ?Z) :-
+    specializes(?X, ?Y),
+    ancestor(?Y, ?Z).
+
+descendant(?X, ?Y) :-
+    ancestor(?Y, ?X).
+
+% Reflexive-or-transitive subtype relation. This is useful for powertype
+% checks, because the base type itself is a valid member of its powertype.
+subtypeOrSame(?X, ?X) :-
+    Entity(?X).
+
+subtypeOrSame(?X, ?Y) :-
+    ancestor(?X, ?Y).
+
+@export generalizes :- csv{}.
+@export specializesIn :- csv{}.
+@export specializes :- csv{}.
+@export ancestor :- csv{}.
+@export descendant :- csv{}.
+@export subtypeOrSame :- csv{}.
+
+% ----------------------------------------------------------------------
+% 4. Ontological instance-of
+% ----------------------------------------------------------------------
+
+% Normal single direct classification.
+iof(?X, ?T) :-
+    hasDeclaredType(?X, ?T).
+
+% Marker-based direct classification, used when an element deliberately
+% claims more than one direct classifier.
+iof(?X, ?T) :-
+    markedRef(?X, ?Tag, ?T),
+    tag_ontouml_iof(?Tag).
+
+iof(?X, ?T) :-
+    markedRef(?X, ?Tag, ?T),
+    tag_mlt_iof(?Tag).
+
+% Classification closure through specialization.
+iofPlus(?X, ?T) :-
+    iof(?X, ?T).
+
+iofPlus(?X, ?Super) :-
+    iof(?X, ?Sub),
+    ancestor(?Sub, ?Super).
+
+@export iof :- csv{}.
+@export iofPlus :- csv{}.
+
+% ----------------------------------------------------------------------
+% 5. Potency / level checks
+% ----------------------------------------------------------------------
+
+nextPotency(0, 1).
+nextPotency(1, 2).
+nextPotency(2, 3).
+
+err_non_adjacent_iof(?X, ?T, ?PX, ?PT) :-
+    iof(?X, ?T),
+    hasPotency(?X, ?PX),
+    hasPotency(?T, ?PT),
+    ~nextPotency(?PX, ?PT).
+
+err_cross_potency_specialization(?Sub, ?Base, ?PS, ?PB) :-
+    specializes(?Sub, ?Base),
+    hasPotency(?Sub, ?PS),
+    hasPotency(?Base, ?PB),
+    ?PS != ?PB.
+
+@export err_non_adjacent_iof :- csv{}.
+@export err_cross_potency_specialization :- csv{}.
+
+% ----------------------------------------------------------------------
+% 6. OntoUML category predicates
+% ----------------------------------------------------------------------
+
+ontoKind(?T) :- marked(?T, ?Tag), tag_kind(?Tag).
+ontoCollective(?T) :- marked(?T, ?Tag), tag_collective(?Tag).
+ontoQuantity(?T) :- marked(?T, ?Tag), tag_quantity(?Tag).
+ontoSubkind(?T) :- marked(?T, ?Tag), tag_subkind(?Tag).
+ontoRole(?T) :- marked(?T, ?Tag), tag_role(?Tag).
+ontoPhase(?T) :- marked(?T, ?Tag), tag_phase(?Tag).
+ontoCategory(?T) :- marked(?T, ?Tag), tag_category(?Tag).
+ontoMixin(?T) :- marked(?T, ?Tag), tag_mixin(?Tag).
+ontoRoleMixin(?T) :- marked(?T, ?Tag), tag_roleMixin(?Tag).
+ontoPhaseMixin(?T) :- marked(?T, ?Tag), tag_phaseMixin(?Tag).
+ontoRelator(?T) :- marked(?T, ?Tag), tag_relator(?Tag).
+ontoMode(?T) :- marked(?T, ?Tag), tag_mode(?Tag).
+ontoQuality(?T) :- marked(?T, ?Tag), tag_quality(?Tag).
+
+% Identity providers listed by the BinOver specification: Kind, Quantity,
+% Collective. Relator and mode are handled by separate BinOver variants.
+
+identityProvider(?T) :- ontoKind(?T).
+identityProvider(?T) :- ontoQuantity(?T).
+identityProvider(?T) :- ontoCollective(?T).
+
+% Sortals used by the BinOver common-identity-provider and mixin variants:
+% Kind, Quantity, Collective, Subkind, Role, and Phase.
+sortal(?T) :- ontoKind(?T).
+sortal(?T) :- ontoQuantity(?T).
+sortal(?T) :- ontoCollective(?T).
+sortal(?T) :- ontoSubkind(?T).
+sortal(?T) :- ontoRole(?T).
+sortal(?T) :- ontoPhase(?T).
+
+mixinType(?T) :- ontoCategory(?T).
+mixinType(?T) :- ontoMixin(?T).
+mixinType(?T) :- ontoRoleMixin(?T).
+
+modeType(?T) :- ontoMode(?T).
+
+% If qualities should be treated as modes for a specific experiment, uncomment:
+% modeType(?T) :- ontoQuality(?T).
+
+@export ontoKind :- csv{}.
+@export ontoSubkind :- csv{}.
+@export ontoRole :- csv{}.
+@export sortal :- csv{}.
+@export identityProvider :- csv{}.
+@export mixinType :- csv{}.
+
+% ----------------------------------------------------------------------
+% 7. OntoUML Kind constraints
+% ----------------------------------------------------------------------
+
+forbiddenKindAncestor(?T) :- tag_kind(?T).
+forbiddenKindAncestor(?T) :- tag_collective(?T).
+forbiddenKindAncestor(?T) :- tag_quantity(?T).
+forbiddenKindAncestor(?T) :- tag_relator(?T).
+forbiddenKindAncestor(?T) :- tag_mode(?T).
+forbiddenKindAncestor(?T) :- tag_quality(?T).
+forbiddenKindAncestor(?T) :- tag_subkind(?T).
+forbiddenKindAncestor(?T) :- tag_role(?T).
+forbiddenKindAncestor(?T) :- tag_phase(?T).
+forbiddenKindAncestor(?T) :- tag_roleMixin(?T).
+
+err_kind_bad_ancestor(?K, ?A, ?Tag) :-
+    ontoKind(?K),
+    ancestor(?K, ?A),
+    ?K != ?A,
+    marked(?A, ?Tag),
+    forbiddenKindAncestor(?Tag).
+
+forbiddenKindDesc(?T) :- tag_category(?T).
+forbiddenKindDesc(?T) :- tag_roleMixin(?T).
+forbiddenKindDesc(?T) :- tag_mixin(?T).
+
+err_kind_bad_descendant(?K, ?D, ?Tag) :-
+    ontoKind(?K),
+    ancestor(?D, ?K),
+    ?D != ?K,
+    marked(?D, ?Tag),
+    forbiddenKindDesc(?Tag).
+
+@export err_kind_bad_ancestor :- csv{}.
+@export err_kind_bad_descendant :- csv{}.
+
+% ----------------------------------------------------------------------
+% 8. Relationship endpoints from RE/PA structure
+% ----------------------------------------------------------------------
+
+% A relationship end is any participation owned by a relationship and
+% connected to a type. BinOver is symmetric in its endpoint types, so no
+% OntoUML.sourceEnd / OntoUML.targetEnd markers are required.
+endType(?R, ?P, ?T) :-
+    Relationship(?R),
+    Participation(?P),
+    hasCustodian(?P, ?R),
+    isConnectedTo(?P, ?T).
+
+% Ordered endpoint pairs. If a relation has two ends, this naturally yields
+% both orders. The presentation layer can normalize these symmetric rows.
+relationEndPair(?R, ?T1, ?T2) :-
+    endType(?R, ?P1, ?T1),
+    endType(?R, ?P2, ?T2),
+    ?P1 != ?P2.
+
+@export endType :- csv{}.
+@export relationEndPair :- csv{}.
+
+% ----------------------------------------------------------------------
+% 9. Disjointness helpers
+% ----------------------------------------------------------------------
+
+isCategorizationNode(?C) :- Categorization(?C).
+isCategorizationNode(?C) :- categorization(?C).
+
+coSpecializedIn(?C, ?A, ?B) :-
+    specializesIn(?C, ?A),
+    specializesIn(?C, ?B),
+    ?A != ?B.
+
+explicitlyDisjoint(?A, ?B) :-
+    isCategorizationNode(?C),
+    isDisjoint(?C, true),
+    coSpecializedIn(?C, ?A, ?B).
+
+explicitlyDisjoint(?A, ?B) :-
+    isCategorizationNode(?C),
+    isDisjoint(?C, true),
+    coSpecializedIn(?C, ?B, ?A).
+
+hasIdentityProvider(?T, ?K) :-
+    identityProvider(?K),
+    ?T = ?K.
+
+hasIdentityProvider(?T, ?K) :-
+    identityProvider(?K),
+    ancestor(?T, ?K).
+
+sameIdentityProvider(?A, ?B, ?K) :-
+    hasIdentityProvider(?A, ?K),
+    hasIdentityProvider(?B, ?K).
+
+commonSupertype(?A, ?B, ?S) :-
+    ancestor(?A, ?S),
+    ancestor(?B, ?S),
+    ?A != ?B.
+
+@export explicitlyDisjoint :- csv{}.
+@export hasIdentityProvider :- csv{}.
+@export sameIdentityProvider :- csv{}.
+@export commonSupertype :- csv{}.
+
+% ----------------------------------------------------------------------
+% 10. Complete BinOver variant family
+% ----------------------------------------------------------------------
+
+% Case 1. Source equals target.
+binOverCase(?Source, ?Target, <BinOver.equalTypes>) :-
+    Node(?Source), Node(?Target), ?Source = ?Target.
+
+% Case 2. Source is a direct or indirect subtype of target.
+binOverCase(?Source, ?Target, <BinOver.sourceSubtypeTarget>) :-
+    ancestor(?Source, ?Target).
+
+% Case 3. Target is a direct or indirect subtype of source.
+binOverCase(?Source, ?Target, <BinOver.targetSubtypeSource>) :-
+    ancestor(?Target, ?Source).
+
+% Case 4. Source and target are sortals sharing a common
+% identity provider, and they are not explicitly disjoint.
+binOverCase(?Source, ?Target, <BinOver.commonIdentityProvider>) :-
+    sortal(?Source),
+    sortal(?Target),
+    ?Source != ?Target,
+    sameIdentityProvider(?Source, ?Target, ?K),
+    ~explicitlyDisjoint(?Source, ?Target).
+
+% Case 5. Source and target are relators sharing a common supertype,
+% and they are not explicitly disjoint.
+binOverCase(?Source, ?Target, <BinOver.commonRelatorSupertype>) :-
+    ontoRelator(?Source),
+    ontoRelator(?Target),
+    ?Source != ?Target,
+    commonSupertype(?Source, ?Target, ?Super),
+    ~explicitlyDisjoint(?Source, ?Target).
+
+% Case 6. Source and target are modes sharing a common supertype,
+% and they are not explicitly disjoint.
+binOverCase(?Source, ?Target, <BinOver.commonModeSupertype>) :-
+    modeType(?Source),
+    modeType(?Target),
+    ?Source != ?Target,
+    commonSupertype(?Source, ?Target, ?Super),
+    ~explicitlyDisjoint(?Source, ?Target).
+
+% Case 7. Source and target are mixins that directly or indirectly
+% generalize at least one common sortal.
+binOverCase(?Source, ?Target, <BinOver.mixinsCommonSortal>) :-
+    mixinType(?Source),
+    mixinType(?Target),
+    ?Source != ?Target,
+    sortal(?S),
+    ancestor(?S, ?Source),
+    ancestor(?S, ?Target).
+
+% Case 8. Source and target are mixins that share a common mixin
+% supertype and none of their subtypes are sortals.
+hasSortalSubtype(?M) :-
+    sortal(?S),
+    ancestor(?S, ?M).
+
+binOverCase(?Source, ?Target, <BinOver.mixinsCommonMixinSupertype>) :-
+    mixinType(?Source),
+    mixinType(?Target),
+    ?Source != ?Target,
+    mixinType(?Super),
+    ancestor(?Source, ?Super),
+    ancestor(?Target, ?Super),
+    ~hasSortalSubtype(?Source),
+    ~hasSortalSubtype(?Target).
+
+mayOverlap(?End1, ?End2) :-
+    binOverCase(?End1, ?End2, ?Case).
+
+warn_bin_over(?R, ?End1, ?End2) :-
+    relationEndPair(?R, ?End1, ?End2),
+    mayOverlap(?End1, ?End2).
+
+warn_bin_over_case(?R, ?End1, ?End2, ?Case) :-
+    relationEndPair(?R, ?End1, ?End2),
+    binOverCase(?End1, ?End2, ?Case).
+
+% Substrate extension: when the model contains individuals, attach
+% an explicit witness to the BinOver warning.
+warn_bin_over_witness(?R, ?End1, ?End2, ?X) :-
+    warn_bin_over(?R, ?End1, ?End2),
+    iofPlus(?X, ?End1),
+    iofPlus(?X, ?End2).
+
+@export binOverCase :- csv{}.
+@export mayOverlap :- csv{}.
+@export warn_bin_over :- csv{}.
+@export warn_bin_over_case :- csv{}.
+@export warn_bin_over_witness :- csv{}.
+
+% ----------------------------------------------------------------------
+% 11. MLT relation extraction
+% ----------------------------------------------------------------------
+
+% Direct member of a partitioning type. This deliberately uses iof, not
+% iofPlus, to avoid cascading inherited partition membership unless a
+% separate rule explicitly asks for it.
+partitions(?P, ?Base) :-
+    markedRef(?P, ?Tag, ?Base),
+    tag_partitions(?Tag).
+
+% Optional inherited partition membership, useful for analyses that want
+% to study the consequences of higher-order classifier specialization.
+powertypeOf(?P, ?Base) :-
+    markedRef(?P, ?Tag, ?Base),
+    tag_powertypeOf(?Tag).
+
+categorizes(?C, ?Base) :-
+    markedRef(?C, ?Tag, ?Base),
+    tag_categorizes(?Tag).
+
+% A partition is a stronger categorization.
+categorizes(?C, ?Base) :-
+    partitions(?C, ?Base).
+
+higherOrderClassifier(?C, ?Base, <MLT.partition>) :-
+    partitions(?C, ?Base).
+
+higherOrderClassifier(?C, ?Base, <MLT.powertype>) :-
+    powertypeOf(?C, ?Base).
+
+higherOrderClassifier(?C, ?Base, <MLT.categorizer>) :-
+    categorizes(?C, ?Base).
+
+@export partitions :- csv{}.
+@export powertypeOf :- csv{}.
+@export categorizes :- csv{}.
+@export higherOrderClassifier :- csv{}.
+
+% ----------------------------------------------------------------------
+% 12. MLT partition rules
+% ----------------------------------------------------------------------
+
+partitionMember(?P, ?M) :-
+    partitions(?P, ?Base),
+    iof(?M, ?P),
+    ancestor(?M, ?Base).
+
+
+partitionMemberPlus(?P, ?M) :-
+    partitions(?P, ?Base),
+    iofPlus(?M, ?P),
+    ancestor(?M, ?Base).
+
+baseIndividual(?X, ?Base) :-
+    hasPotency(?X, 0),
+    iofPlus(?X, ?Base).
+
+coveredBy(?P, ?X) :-
+    partitions(?P, ?Base),
+    baseIndividual(?X, ?Base),
+    partitionMember(?P, ?M),
+    iofPlus(?X, ?M).
+
+err_partition_bad_member(?P, ?Base, ?M) :-
+    partitions(?P, ?Base),
+    iof(?M, ?P),
+    ~ancestor(?M, ?Base).
+
+err_partition_missing(?P, ?Base, ?X) :-
+    partitions(?P, ?Base),
+    baseIndividual(?X, ?Base),
+    ~coveredBy(?P, ?X).
+
+err_partition_overlap(?P, ?X, ?M1, ?M2) :-
+    partitions(?P, ?Base),
+    baseIndividual(?X, ?Base),
+    partitionMember(?P, ?M1),
+    partitionMember(?P, ?M2),
+    ?M1 != ?M2,
+    iofPlus(?X, ?M1),
+    iofPlus(?X, ?M2).
+
+err_partition_subtype_overlap(?P, ?BadType, ?M1, ?M2) :-
+    partitions(?P, ?Base),
+    partitionMember(?P, ?M1),
+    partitionMember(?P, ?M2),
+    ?M1 != ?M2,
+    ancestor(?BadType, ?M1),
+    ancestor(?BadType, ?M2).
+
+% The theorem-style case: two different partitioning types of the same
+% base type should not stand in proper specialization.
+err_partition_specialization(?P1, ?P2, ?Base) :-
+    partitions(?P1, ?Base),
+    partitions(?P2, ?Base),
+    ?P1 != ?P2,
+    ancestor(?P1, ?P2).
+
+% Generalized refinement variant: the bases are different but comparable
+% by specialization. This is useful if a diagnostic model nests a partition
+% of a subtype below a partition of an ancestor type.
+err_partition_specialization_refined_base(?P1, ?P2, ?Base1, ?Base2) :-
+    partitions(?P1, ?Base1),
+    partitions(?P2, ?Base2),
+    ?P1 != ?P2,
+    ?Base1 != ?Base2,
+    ancestor(?P1, ?P2),
+    ancestor(?Base1, ?Base2).
+
+err_partition_specialization_refined_base(?P1, ?P2, ?Base1, ?Base2) :-
+    partitions(?P1, ?Base1),
+    partitions(?P2, ?Base2),
+    ?P1 != ?P2,
+    ?Base1 != ?Base2,
+    ancestor(?P1, ?P2),
+    ancestor(?Base2, ?Base1).
+
+@export partitionMember :- csv{}.
+@export partitionMemberPlus :- csv{}.
+@export baseIndividual :- csv{}.
+@export coveredBy :- csv{}.
+@export err_partition_bad_member :- csv{}.
+@export err_partition_missing :- csv{}.
+@export err_partition_overlap :- csv{}.
+@export err_partition_subtype_overlap :- csv{}.
+@export err_partition_specialization :- csv{}.
+@export err_partition_specialization_refined_base :- csv{}.
+
+% ----------------------------------------------------------------------
+% 13. Higher-order classifier consistency checks
+% ----------------------------------------------------------------------
+
+err_classifier_bad_potency(?Classifier, ?Base, ?Kind, ?PC, ?PB) :-
+    higherOrderClassifier(?Classifier, ?Base, ?Kind),
+    hasPotency(?Classifier, ?PC),
+    hasPotency(?Base, ?PB),
+    ~nextPotency(?PB, ?PC).
+
+% A member of a categorizer should specialize the categorized base.
+err_categorizer_bad_member(?C, ?Base, ?M) :-
+    categorizes(?C, ?Base),
+    iof(?M, ?C),
+    ~ancestor(?M, ?Base).
+
+% A member of a powertype should be the base type itself or specialize
+% the powertype base. This is a structural approximation; full
+% Cardelli-powertype completeness is not attempted here.
+err_powertype_bad_member(?P, ?Base, ?M) :-
+    powertypeOf(?P, ?Base),
+    iof(?M, ?P),
+    ~subtypeOrSame(?M, ?Base).
+
+@export err_classifier_bad_potency :- csv{}.
+@export err_categorizer_bad_member :- csv{}.
+@export err_powertype_bad_member :- csv{}.
+
+% ----------------------------------------------------------------------
+% 14. Suggested exports for the integrated diagnostic model
+% ----------------------------------------------------------------------
+% Main diagnostic exports are already declared above. The following list is
+% a guide to what the paper will typically report:
+%
+%   err_kind_bad_ancestor
+%   err_kind_bad_descendant
+%   warn_bin_over
+%   warn_bin_over_case
+%   warn_bin_over_witness
+%   err_non_adjacent_iof
+%   err_cross_potency_specialization
+%   err_partition_missing
+%   err_partition_overlap
+%   err_partition_subtype_overlap
+%   err_partition_specialization
+%   err_partition_specialization_refined_base
+%   err_classifier_bad_potency
+%   err_categorizer_bad_member
+%   err_powertype_bad_member
+% ======================================================================
+
+
+
