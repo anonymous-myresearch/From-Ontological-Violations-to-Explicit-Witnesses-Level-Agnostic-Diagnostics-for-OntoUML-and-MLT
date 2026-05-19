@@ -547,7 +547,7 @@ iofPlus(?X, ?Super) :-
 @export iofPlus :- csv{}.
 
 
-% 5. Potency / level checks----------------------------
+% Potency / level checks----------------------------
 nextPotency(0, 1).
 nextPotency(1, 2).
 nextPotency(2, 3).
@@ -649,7 +649,7 @@ err_kind_bad_descendant(?K, ?D, ?Tag) :-
 @export err_kind_bad_descendant :- csv{}.
 
 
-% 8. Relationship endpoints from RE/PA structure------------------
+% Relationship endpoints from RE/PA structure------------------
 endType(?R, ?P, ?T) :-
     Relationship(?R),
     Participation(?P),
@@ -664,7 +664,7 @@ relationEndPair(?R, ?T1, ?T2) :-
 @export endType :- csv{}.
 @export relationEndPair :- csv{}.
 
-% 9. Disjointness helpers-------------------------------
+% Disjointness helpers-------------------------------
 isCategorizationNode(?C) :- Categorization(?C).
 isCategorizationNode(?C) :- categorization(?C).
 
@@ -827,7 +827,7 @@ higherOrderClassifier(?C, ?Base, <MLT.categorizer>) :-
 @export higherOrderClassifier :- csv{}.
 
 
-% 12. MLT partition rules--------------------
+% MLT partition rules--------------------
 partitionMember(?P, ?M) :-
     partitions(?P, ?Base),
     iof(?M, ?P),
@@ -909,7 +909,7 @@ err_partition_specialization_refined_base(?P1, ?P2, ?Base1, ?Base2) :-
 @export err_partition_specialization :- csv{}.
 @export err_partition_specialization_refined_base :- csv{}.
 
-% 13. Higher-order classifier consistency checks-----------------
+% Higher-order classifier consistency checks-----------------
 err_classifier_bad_potency(?Classifier, ?Base, ?Kind, ?PC, ?PB) :-
     higherOrderClassifier(?Classifier, ?Base, ?Kind),
     hasPotency(?Classifier, ?PC),
