@@ -1,4 +1,4 @@
-# Level-Agnostic-Diagnostics-for-OntoUML-and-MLT
+# Level Agnostic Diagnostics for OntoUML and MLT
 
 This repository consists of the following required artifacts :
 - HUTN file (Human-Usable Textual Notation) of the model
