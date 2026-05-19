@@ -1,6 +1,7 @@
 # Level-Agnostic-Diagnostics-for-OntoUML-and-MLT
 
 Paper-facing normalized summary:
+
 err_kind_bad_ancestor(PersonTypeByGender, PersonType, OntoUML.kind)
 
 warn_bin_over(worksFor, Researcher, Manager)
