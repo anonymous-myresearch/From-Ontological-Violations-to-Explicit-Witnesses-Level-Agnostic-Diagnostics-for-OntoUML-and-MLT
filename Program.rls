@@ -434,18 +434,14 @@ markedRef(?X, ?Tag, ?Target) :-
 @export marked :- csv{}.
 @export markedRef :- csv{}.
 
-% ----------------------------------------------------------------------
-% 2. Tag aliases
-% ----------------------------------------------------------------------
-
-% Intercalation tags.
+% Intercalation tags------------------
 generalizationTag(<CategorizationTag.Generalization>).
 generalizationTag(Generalization).
 
 specializationTag(<CategorizationTag.Specialization>).
 specializationTag(Specialization).
 
-% OntoUML class/category marker tags.
+% OntoUML class/category marker tags---------------------
 tag_kind(<OntoUML.kind>).
 
 tag_collective(<OntoUML.collective>).
@@ -472,12 +468,10 @@ tag_mode(<OntoUML.mode>).
 
 tag_quality(<OntoUML.quality>).
 
-% OntoUML instance-of tags.
-% Relationship endpoints are obtained directly from the RE/PA structure;
-% no sourceEnd/targetEnd marker tags are required for BinOver.
+% OntoUML instance-of tags------------------------
 tag_ontouml_iof(<OntoUML.isInstanceOf>).
 
-% MLT marker tags.
+% MLT marker tags---------------------------------
 tag_mlt_iof(<MLT.isInstanceOf>).
 
 tag_partitions(<MLT.partitions>).
@@ -486,9 +480,7 @@ tag_powertypeOf(<MLT.powertypeOf>).
 
 tag_categorizes(<MLT.categorizes>).
 
-% ----------------------------------------------------------------------
-% 3. Specialization, ancestors, and descendants
-% ----------------------------------------------------------------------
+% Specialization, ancestors, and descendants------------------------
 generalizes(?C, ?Base) :-
     Intercalation(?I),
     hasCustodian(?I, ?C),
@@ -517,9 +509,7 @@ ancestor(?X, ?Z) :-
 descendant(?X, ?Y) :-
     ancestor(?Y, ?X).
 
-% Reflexive-or-transitive subtype relation. This is useful for powertype
-% checks, because the base type itself is a valid member of its powertype.
-subtypeOrSame(?X, ?X) :-
+% Reflexive-or-transitive subtype relation--------------------------
     Entity(?X).
 
 subtypeOrSame(?X, ?Y) :-
@@ -532,16 +522,11 @@ subtypeOrSame(?X, ?Y) :-
 @export descendant :- csv{}.
 @export subtypeOrSame :- csv{}.
 
-% ----------------------------------------------------------------------
-% 4. Ontological instance-of
-% ----------------------------------------------------------------------
-
-% Normal single direct classification.
+% Ontological instance-of-------------------------------------
 iof(?X, ?T) :-
     hasDeclaredType(?X, ?T).
 
-% Marker-based direct classification, used when an element deliberately
-% claims more than one direct classifier.
+% Marker-based direct classification--------------------------
 iof(?X, ?T) :-
     markedRef(?X, ?Tag, ?T),
     tag_ontouml_iof(?Tag).
@@ -550,7 +535,7 @@ iof(?X, ?T) :-
     markedRef(?X, ?Tag, ?T),
     tag_mlt_iof(?Tag).
 
-% Classification closure through specialization.
+% Classification closure through specialization----------------------
 iofPlus(?X, ?T) :-
     iof(?X, ?T).
 
@@ -561,10 +546,8 @@ iofPlus(?X, ?Super) :-
 @export iof :- csv{}.
 @export iofPlus :- csv{}.
 
-% ----------------------------------------------------------------------
-% 5. Potency / level checks
-% ----------------------------------------------------------------------
 
+% 5. Potency / level checks----------------------------
 nextPotency(0, 1).
 nextPotency(1, 2).
 nextPotency(2, 3).
@@ -584,10 +567,7 @@ err_cross_potency_specialization(?Sub, ?Base, ?PS, ?PB) :-
 @export err_non_adjacent_iof :- csv{}.
 @export err_cross_potency_specialization :- csv{}.
 
-% ----------------------------------------------------------------------
-% 6. OntoUML category predicates
-% ----------------------------------------------------------------------
-
+% OntoUML category predicates------------------------------------
 ontoKind(?T) :- marked(?T, ?Tag), tag_kind(?Tag).
 ontoCollective(?T) :- marked(?T, ?Tag), tag_collective(?Tag).
 ontoQuantity(?T) :- marked(?T, ?Tag), tag_quantity(?Tag).
@@ -603,14 +583,14 @@ ontoMode(?T) :- marked(?T, ?Tag), tag_mode(?Tag).
 ontoQuality(?T) :- marked(?T, ?Tag), tag_quality(?Tag).
 
 % Identity providers listed by the BinOver specification: Kind, Quantity,
-% Collective. Relator and mode are handled by separate BinOver variants.
+% Collective. Relator and mode are handled by separate BinOver variants---------------------------------------
 
 identityProvider(?T) :- ontoKind(?T).
 identityProvider(?T) :- ontoQuantity(?T).
 identityProvider(?T) :- ontoCollective(?T).
 
 % Sortals used by the BinOver common-identity-provider and mixin variants:
-% Kind, Quantity, Collective, Subkind, Role, and Phase.
+% Kind, Quantity, Collective, Subkind, Role, and Phase-----------------------------------------------
 sortal(?T) :- ontoKind(?T).
 sortal(?T) :- ontoQuantity(?T).
 sortal(?T) :- ontoCollective(?T).
@@ -624,7 +604,7 @@ mixinType(?T) :- ontoRoleMixin(?T).
 
 modeType(?T) :- ontoMode(?T).
 
-% If qualities should be treated as modes for a specific experiment, uncomment:
+
 % modeType(?T) :- ontoQuality(?T).
 
 @export ontoKind :- csv{}.
@@ -634,10 +614,8 @@ modeType(?T) :- ontoMode(?T).
 @export identityProvider :- csv{}.
 @export mixinType :- csv{}.
 
-% ----------------------------------------------------------------------
-% 7. OntoUML Kind constraints
-% ----------------------------------------------------------------------
 
+% OntoUML Kind constraints----------------------------
 forbiddenKindAncestor(?T) :- tag_kind(?T).
 forbiddenKindAncestor(?T) :- tag_collective(?T).
 forbiddenKindAncestor(?T) :- tag_quantity(?T).
@@ -670,21 +648,14 @@ err_kind_bad_descendant(?K, ?D, ?Tag) :-
 @export err_kind_bad_ancestor :- csv{}.
 @export err_kind_bad_descendant :- csv{}.
 
-% ----------------------------------------------------------------------
-% 8. Relationship endpoints from RE/PA structure
-% ----------------------------------------------------------------------
 
-% A relationship end is any participation owned by a relationship and
-% connected to a type. BinOver is symmetric in its endpoint types, so no
-% OntoUML.sourceEnd / OntoUML.targetEnd markers are required.
+% 8. Relationship endpoints from RE/PA structure------------------
 endType(?R, ?P, ?T) :-
     Relationship(?R),
     Participation(?P),
     hasCustodian(?P, ?R),
     isConnectedTo(?P, ?T).
 
-% Ordered endpoint pairs. If a relation has two ends, this naturally yields
-% both orders. The presentation layer can normalize these symmetric rows.
 relationEndPair(?R, ?T1, ?T2) :-
     endType(?R, ?P1, ?T1),
     endType(?R, ?P2, ?T2),
@@ -693,10 +664,7 @@ relationEndPair(?R, ?T1, ?T2) :-
 @export endType :- csv{}.
 @export relationEndPair :- csv{}.
 
-% ----------------------------------------------------------------------
-% 9. Disjointness helpers
-% ----------------------------------------------------------------------
-
+% 9. Disjointness helpers-------------------------------
 isCategorizationNode(?C) :- Categorization(?C).
 isCategorizationNode(?C) :- categorization(?C).
 
@@ -737,10 +705,7 @@ commonSupertype(?A, ?B, ?S) :-
 @export sameIdentityProvider :- csv{}.
 @export commonSupertype :- csv{}.
 
-% ----------------------------------------------------------------------
-% 10. Complete BinOver variant family
-% ----------------------------------------------------------------------
-
+% Complete BinOver variant family-----------------------------
 % Case 1. Source equals target.
 binOverCase(?Source, ?Target, <BinOver.equalTypes>) :-
     Node(?Source), Node(?Target), ?Source = ?Target.
@@ -830,19 +795,12 @@ warn_bin_over_witness(?R, ?End1, ?End2, ?X) :-
 @export warn_bin_over_case :- csv{}.
 @export warn_bin_over_witness :- csv{}.
 
-% ----------------------------------------------------------------------
-% 11. MLT relation extraction
-% ----------------------------------------------------------------------
 
-% Direct member of a partitioning type. This deliberately uses iof, not
-% iofPlus, to avoid cascading inherited partition membership unless a
-% separate rule explicitly asks for it.
+% MLT relation extraction-------------------------------------
 partitions(?P, ?Base) :-
     markedRef(?P, ?Tag, ?Base),
     tag_partitions(?Tag).
 
-% Optional inherited partition membership, useful for analyses that want
-% to study the consequences of higher-order classifier specialization.
 powertypeOf(?P, ?Base) :-
     markedRef(?P, ?Tag, ?Base),
     tag_powertypeOf(?Tag).
@@ -851,7 +809,6 @@ categorizes(?C, ?Base) :-
     markedRef(?C, ?Tag, ?Base),
     tag_categorizes(?Tag).
 
-% A partition is a stronger categorization.
 categorizes(?C, ?Base) :-
     partitions(?C, ?Base).
 
@@ -869,10 +826,8 @@ higherOrderClassifier(?C, ?Base, <MLT.categorizer>) :-
 @export categorizes :- csv{}.
 @export higherOrderClassifier :- csv{}.
 
-% ----------------------------------------------------------------------
-% 12. MLT partition rules
-% ----------------------------------------------------------------------
 
+% 12. MLT partition rules--------------------
 partitionMember(?P, ?M) :-
     partitions(?P, ?Base),
     iof(?M, ?P),
@@ -921,17 +876,12 @@ err_partition_subtype_overlap(?P, ?BadType, ?M1, ?M2) :-
     ancestor(?BadType, ?M1),
     ancestor(?BadType, ?M2).
 
-% The theorem-style case: two different partitioning types of the same
-% base type should not stand in proper specialization.
 err_partition_specialization(?P1, ?P2, ?Base) :-
     partitions(?P1, ?Base),
     partitions(?P2, ?Base),
     ?P1 != ?P2,
     ancestor(?P1, ?P2).
 
-% Generalized refinement variant: the bases are different but comparable
-% by specialization. This is useful if a diagnostic model nests a partition
-% of a subtype below a partition of an ancestor type.
 err_partition_specialization_refined_base(?P1, ?P2, ?Base1, ?Base2) :-
     partitions(?P1, ?Base1),
     partitions(?P2, ?Base2),
@@ -959,25 +909,19 @@ err_partition_specialization_refined_base(?P1, ?P2, ?Base1, ?Base2) :-
 @export err_partition_specialization :- csv{}.
 @export err_partition_specialization_refined_base :- csv{}.
 
-% ----------------------------------------------------------------------
-% 13. Higher-order classifier consistency checks
-% ----------------------------------------------------------------------
-
+% 13. Higher-order classifier consistency checks-----------------
 err_classifier_bad_potency(?Classifier, ?Base, ?Kind, ?PC, ?PB) :-
     higherOrderClassifier(?Classifier, ?Base, ?Kind),
     hasPotency(?Classifier, ?PC),
     hasPotency(?Base, ?PB),
     ~nextPotency(?PB, ?PC).
 
-% A member of a categorizer should specialize the categorized base.
+% A member of a categorizer should specialize the categorized base---------------------
 err_categorizer_bad_member(?C, ?Base, ?M) :-
     categorizes(?C, ?Base),
     iof(?M, ?C),
     ~ancestor(?M, ?Base).
 
-% A member of a powertype should be the base type itself or specialize
-% the powertype base. This is a structural approximation; full
-% Cardelli-powertype completeness is not attempted here.
 err_powertype_bad_member(?P, ?Base, ?M) :-
     powertypeOf(?P, ?Base),
     iof(?M, ?P),
@@ -987,28 +931,7 @@ err_powertype_bad_member(?P, ?Base, ?M) :-
 @export err_categorizer_bad_member :- csv{}.
 @export err_powertype_bad_member :- csv{}.
 
-% ----------------------------------------------------------------------
-% 14. Suggested exports for the integrated diagnostic model
-% ----------------------------------------------------------------------
-% Main diagnostic exports are already declared above. The following list is
-% a guide to what the paper will typically report:
-%
-%   err_kind_bad_ancestor
-%   err_kind_bad_descendant
-%   warn_bin_over
-%   warn_bin_over_case
-%   warn_bin_over_witness
-%   err_non_adjacent_iof
-%   err_cross_potency_specialization
-%   err_partition_missing
-%   err_partition_overlap
-%   err_partition_subtype_overlap
-%   err_partition_specialization
-%   err_partition_specialization_refined_base
-%   err_classifier_bad_potency
-%   err_categorizer_bad_member
-%   err_powertype_bad_member
-% ======================================================================
+
 
 
 
