@@ -1,12 +1,12 @@
 # Level Agnostic Diagnostics for OntoUML and MLT
 
-This repository consists of the following required artifacts :
-- HUTN file (Human-Usable Textual Notation) of the model
-- Program file (Datalog Facts and Rules executable on NEMO Graph Rule Engine)
+This repository contains the following required artifacts:
 
-**Paper-facing normalized summary:**
+- HUTN file (Human-Usable Textual Notation) describing the model
+- Program file containing Datalog facts and rules executable on the NEMO Graph Rule Engine
+- Paper-facing normalized summary of the generated results
 
-By executing xxxxx.rls file on NEMO, the output will be generated as .csv files. Following output demonstrates the voilations which can be found in the results folder: 
+Executing the Program.rls file with the NEMO Graph Rule Engine generates output as .csv files. The generated results, located in the results/ folder, demonstrate the detected violations.
 
 
 - err_kind_bad_ancestor(PersonTypeByGender, PersonType, OntoUML.kind).
